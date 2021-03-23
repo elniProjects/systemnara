@@ -1,0 +1,5 @@
+Kompletering ou4: c18eno@cs.umu.se
+
+	1. Har fixat minnesläckor som ledde till Helgrind.
+	2. Har fixat resonemang kring prestanda i rapporten under rubriken analys.
+	3. har fixat plot av prestanda mot antal trådar.

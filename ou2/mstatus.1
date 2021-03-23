@@ -1,0 +1,25 @@
+manpage for mstatus.
+.\" Contact c18eno@cs.umu.se to correct errors or typos.
+.TH MSTATUS 1 "23 september 2019" "1.0"
+.SH NAME
+mstatus \- shows the last five activities for a user of a specific computer with date and time.
+.SH SYNOPSIS
+mstatus {login|logout|xlock|unxlock} [message]
+.SH DESCRIPTION
+mstatus shows the latest five activity for a user on a specific device.
+.SH OPTIONS
+.TP
+mstatus {login|logout|xlock|unxlock} [message]
+.IP login
+shows if the user login to the device
+.IP logout
+shows if the user loged out to the device whi a message
+.IP xlock
+shows if the user locked the device with some message
+.IP unxlock
+shows if the user unlocked the device with some message
+.IP message
+shows if the user loged out to the device whi a message
+
+.SH AUTHOR
+Elias Niko (c18eno@cs.umu.se)

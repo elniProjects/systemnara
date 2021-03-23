@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# FILE:                   mstatus.sh
+# DESCRIPTION:            store five latest activity
+#                         for a user in a file by type .plan
+# DATE:                   23 september 2019
+# AUTHOR:                 Elias Niko c18eno@cs.umu.se
+
+
+# User have to run the script at least with an argument
+if [ "$#" -eq 0 ]; then
+      echo "Error, Enter any argument"
+      exit 1
+fi
+
+      curentDate=`date +"%y-%m-%d %T:"`
+      deviceName=`hostname`
+str=$1
+shift;
+
+if [ "$#" -gt 0 ]; then
+      message="with message \""$@"\""
+fi
+
+
+
+case $str in
+      login)
+      value="logged in on"
+;;
+      logout)
+      value="logged out from"
+;;
+      xlock)
+      value="xlocked "
+;;
+      unxlock)
+      value="un-xlocked "
+;;
+      *)
+      echo >&2 "Error: Not a valid agrument"
+      exit 1
+esac
+
+touch .plan
+
+sort=`wc -l .plan`
+toNumber=$(echo "$sort" | tr -dc '0-9')
+if [[ "$toNumber" -gt 4 ]]; then
+      toHead=`tail -n+2 .plan`
+else
+      toHead=`head -n 4 .plan`
+fi
+
+# Do not store more than 4 activities.
+if [[ -z "$toHead" ]]; then
+      val="$curentDate $value $deviceName $message"
+else
+      val="$toHead"$'\n'"$curentDate $value $deviceName $message"
+fi
+
+
+
+#Delete fully the plan file everytime it's going to be more than five
+delete=`rm -f -r .plan`
+echo "$val" >> .plan
+chmod 644 .plan
